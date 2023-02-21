@@ -62,6 +62,29 @@
 |   asgi.py   | communicate with Django App |
 |   wsgi.py   | communicate with Django App |
 
+##### Settings.py
+* global variables
+> Do not use/import self-created settings file. Use **django.conf** or settings will be affected by
+> 1. other different settings.py file
+> 2. Hidden settings of Django
+> 3. Third-party libraries settings
+
+> if one setting variable is missing, the value will fall back to the default value of Django
+> 
+> If using self-created settings files, the value will not fall back
+
+|    variable    | Meaning                                                                                  |
+|:--------------:|:-----------------------------------------------------------------------------------------|
+|   SECRET_KEY   | for hashing, tokens, cryptographic functions                                             |
+|     DEBUG      | True: automatically display exceptions to browser. If production, it should be set False |
+| INSTALLED_APPS | Django third-party apps                                                                  |
+|  ROOT_URLCONF  | Django loads first to find URLs. index view URL map                                      |
+|   TEMPLATES    ||
+|    APP_DIRS    | look in a templates directory inside each INSTALLED_APP when loading templates           |
+
+
+
+
 ### django app
 |    File     | Meaning                                                                    |
 |:-----------:|:---------------------------------------------------------------------------|
@@ -75,8 +98,34 @@
 
 
 ## QueryDict Object
-* TODO
+* immutable
+  * require `copy` to edit the object
+```python
+qd = QueryDict('k=a&k=b&k=c')
+qd['k'] # c
+qd.get('k') #c
+qd.getlist('k') # ['a', 'b', 'c']
+qd.getlist('g') # []
+```
 
+```python
+qd2 = qd.copy()
+qd2['k'] = 'd'
+qd2['k'] # change c -> d  
+```
+> Note: 
+> 
+> name = request.GET.get('name', 'world') => empty value if name=""
+> use name = request.GET.get('name') or 'world'
+
+## Functions
+
+### Render
+* a shortcut function that returns an HttpResponse instance
+* two arguments
+  * request
+  * name/relative path of the template being rendered
+  * (optional) render context containing variables available in the template
 
 # HTTP status
 | Status  | Meaning                                           |
