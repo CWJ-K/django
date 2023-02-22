@@ -114,7 +114,7 @@ qd2['k'] = 'd'
 qd2['k'] # change c -> d  
 ```
 > Note: 
-> 
+>
 > name = request.GET.get('name', 'world') => empty value if name=""
 > use name = request.GET.get('name') or 'world'
 
