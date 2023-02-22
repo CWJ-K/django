@@ -86,15 +86,15 @@
 
 
 ### django app
-|    File     | Meaning                                                                    |
-|:-----------:|:---------------------------------------------------------------------------|
-| __init__.py | indicate python module                                                     |
-|  admin.py   | built-admin site for viewing and edition data with GUI                     |
-|   apps.py   | configuration for the metadata of app                                      |
-|  models.py  | define the models for applications                                         |
-| migrations  | automatically record changes to database. generated when running manage.py | 
-|  tests.py   | test code                                                                  |
-|  views.py   | django views                                                               |
+|    File     | Meaning                                                                         |
+|:-----------:|:--------------------------------------------------------------------------------|
+| __init__.py | indicate python module                                                          |
+|  admin.py   | built-admin site for viewing and edition data with GUI                          |
+|   apps.py   | configuration for the metadata of app                                           |
+|  models.py  | define the models for applications. Each model transforms into a database table |
+| migrations  | automatically record changes to database. generated when running manage.py      | 
+|  tests.py   | test code                                                                       |
+|  views.py   | django views                                                                    |
 
 
 ## QueryDict Object
@@ -126,6 +126,13 @@ qd2['k'] # change c -> d
   * request
   * name/relative path of the template being rendered
   * (optional) render context containing variables available in the template
+
+
+## ORM
+* convert object-oriented Python code into actual database constructs
+* advantage: avoid sql injection
+### Migration
+* transformation of Python code into database structures
 
 # HTTP status
 | Status  | Meaning                                           |
