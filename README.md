@@ -32,6 +32,10 @@
 * model view template
   * model: define the data for your application and abstraction layer
   * view: the logic for your application 
+    * function-based view
+    * class-based view
+      * compared with function-based view, fewer lines of code need to be used
+      * inherit Django's generic views
   * template: HTML files
 
 ## Structure of directories
@@ -245,7 +249,56 @@ qd2['k'] # change c -> d
 | 500-599 | error on server side                              |
 
 
+# URL Path
+* Project root url
+  * settings.py: ROOT_URLCONF
+  * determine the URL configuration file to be used first
+* include:
+  * on django project level 
+  * a shortcut that allows you to combine URL configurations 
+    * a project has many application. each application has their own URL configurations
 
 
+# Template
+* no need to hardcode template
+  * settings.py: TEMPLATES
 
+| Variable | Meaning                                                                                                          |
+|:--------:|:-----------------------------------------------------------------------------------------------------------------|
+| BACKEND  | the template engine Django uses to work with HTML templates. default - DjangoTemplates                           |
+|   DIRS   | the directories where Django searches for the templates. If empty, search for templates under each app directory |                                |
+| APP_DIRS | True: look for templates in the installed apps under INSTALLED_APPS (settings)                                   |
+| OPTIONS  | template engine-specific settings e.g. context processors                                                        |
+
+## Template Language
+### Template Variables
+* value carried by the variables will be replaced in the template
+```commandline
+  {{ variable }}
+```
+
+### Template Tags
+* for control flow, like if else or for loop
+```commandline
+  {% for element in element_list %}
+    ...
+  {% endfor %}
+```
+
+### Comments
+
+```commandline
+  {% comment %}
+    ...
+    
+  {% endcomment %}
+```
+### Filters
+
+```commandline
+ {{ variable|<filter> }}    
+```
+* <filter>: 
+  * lower: convert string into lowercase
+  * title: convert string into capital
 
