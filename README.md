@@ -87,7 +87,7 @@ publisher = Publisher.objects.get(id=2)
 # all(): retrieve all the objects -> return QuerySet
 contributors = Contributor.objects.all()
 ## get specific object
-contributors[0]
+contributors[0] # because of QuerySet
 contributors[0].first_names
 
 # create an object with foreign object
@@ -113,6 +113,40 @@ r)
 book.contributors.set([contributor1, contributor2], through_defaults={'role': 'CO_AUTHOR'})
 
 # filter
+Contributor.objects.filter(first_names='Peter')
+
+## greater than
+book = Book.objects.filter(publication_date__gt=date(2014, 1, 1))
+## less than: lt
+## less than or equal to: lte
+## greater than or equal to: gte
+## string contain: contains
+## exclude: exclude
+### chains of query
+Book.objects.filter(publication_date__gt=date(2014, 1, 1)).filter(...)
+
+
+
+# order: order_by
+## descending:
+Book.objects.order_by('-title')
+
+# get dictionaries instead of objects
+publishers = Publisher.objects.all().values()
+
+# query data with relationships
+## query by foreign key: __
+Book.objects.filter(publisher__name='Packt Publishing')
+## query by model name in lowercase
+Publisher.objects.get(book__title='..')
+## query by object instance: set.all()
+book = Book.objects.get(title='') # optional
+publisher = Publisher.object.get(name='')
+publisher.book_set.all()
+
+# filter + update/delete
+Contributor.objects.filter(last_names='...').update(first_names='')
+
 
 
 ```
@@ -211,13 +245,7 @@ qd2['k'] # change c -> d
 | 500-599 | error on server side                              |
 
 
-## Model Methods
-* write methods inside a model class
-* can override the default methods of Django models
-  * e.g. __str__()
 
 
 
 
-
-chapter2: 3:42

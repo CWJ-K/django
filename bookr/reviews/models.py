@@ -25,7 +25,7 @@ class Book(models.Model):
     contributors = models.ManyToManyField('Contributor', through='BookContributor')
 
     def __str__(self):
-        return title
+        return self.title
 
 class Contributor(models.Model):
     """A contributor to a book, e.g. author, editor, co-author"""
