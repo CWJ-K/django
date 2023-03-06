@@ -298,7 +298,9 @@ qd2['k'] # change c -> d
 ```commandline
  {{ variable|<filter> }}    
 ```
-* <filter>: 
+* `<filter>`: 
   * lower: convert string into lowercase
   * title: convert string into capital
 
+## Template Inheritance
+* 
