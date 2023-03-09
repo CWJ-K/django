@@ -1,7 +1,7 @@
-
-
 # virtualenv
+
 * Windows
+
 ```bash
     pip install virtualenv
     python -m virtualenv <virtual_name>
@@ -10,7 +10,9 @@
 ```
 
 # django
+
 ## settings.py
+
 * > django 3.1:
   ```
   BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,22 +31,26 @@
 ```
 
 ## MVT
+
 * model view template
-  * model: define the data for your application and abstraction layer
-  * view: the logic for your application 
-    * function-based view
-    * class-based view
-      * compared with function-based view, fewer lines of code need to be used
-      * inherit Django's generic views
-  * template: HTML files
+    * model: define the data for your application and abstraction layer
+    * view: the logic for your application
+        * function-based view
+        * class-based view
+            * compared with function-based view, fewer lines of code need to be used
+            * inherit Django's generic views
+    * template: HTML files
 
 ## Structure of directories
+
 ### Django Project
+
 |   Files   | Meaning               |
 |:---------:|:----------------------|
 | manage.py | manage django project |
 
 #### manage.py
+
 * ``python3 manage.py <code>``
 
 |      Code      | Meaning                                                                                                                                                                        | Example                                                 |
@@ -60,10 +66,12 @@
 |      test      | run automated tests                                                                                                                                                            |
 
 ##### shell
+
 * advantage: no need to maintain sql script
 
 ```python
 from reviews.models import Publisher
+
 publisher = Publisher(name='...', website='...', email='...')
 
 # write the object into the database
@@ -77,21 +85,22 @@ publisher.email = '...'
 
 # create an object in a single step
 from reviews.models import Contributor
-contributor = Contributor.objects.create(first_names='Rowel', last_names='Atienza', email='RowelAtienza@example.com') 
 
+contributor = Contributor.objects.create(first_names='Rowel', last_names='Atienza', email='RowelAtienza@example.com')
 
 # get object
 from reviews.models import Publisher
-publisher = Publisher.objects.get(name='PacktPublishing') 
+
+publisher = Publisher.objects.get(name='PacktPublishing')
 
 ## primary key or id
-publisher = Publisher.objects.get(pk=2) 
+publisher = Publisher.objects.get(pk=2)
 publisher = Publisher.objects.get(id=2)
 
 # all(): retrieve all the objects -> return QuerySet
 contributors = Contributor.objects.all()
 ## get specific object
-contributors[0] # because of QuerySet
+contributors[0]  # because of QuerySet
 contributors[0].first_names
 
 # create an object with foreign object
@@ -100,19 +109,21 @@ book = Book.objects.create(title='...', publication_date='...', isbn='...', publ
 # many-to-many relationships
 book = Book.objects.get(title='Advanced Deep Learning with Keras')
 contributor = Contributor.objects.get(first_names='Rowel')
-book_contributor = BookContributor(book=book, contributor=contributor, role='AUTHOR') 
+book_contributor = BookContributor(book=book, contributor=contributor, role='AUTHOR')
 
 ## add: only one object - no need to use the relationship to connect objects
-book.contributors.add(contributor, through_defaults={'role': 'EDITOR'}) 
+book.contributors.add(contributor, through_defaults={'role': 'EDITOR'})
 
 ## create non-present & non-relational object in the database
-book.contributors.create(first_names='Packtp', last_names='Editor Example', email='PacktEditor2@example.com', through_default
-s={'role': 'EDITOR'})
+book.contributors.create(first_names='Packtp', last_names='Editor Example', email='PacktEditor2@example.com',
+                         through_default
+s = {'role': 'EDITOR'})
 
 ## set: add a list of contributors for a book
 contributor1 = Contributor.objects.create(first_names='Stephen', last_names='Stephen', email='StephenKing@example.com')
-contributor2 = Contributor.objects.create(first_names='Peter', last_names='Straub', email='PeterStraub@example.com') 
-book = Book.objects.create(title='The Talisman', publication_date=date(2012, 9, 25), isbn='9781451697216', publisher=publishe
+contributor2 = Contributor.objects.create(first_names='Peter', last_names='Straub', email='PeterStraub@example.com')
+book = Book.objects.create(title='The Talisman', publication_date=date(2012, 9, 25), isbn='9781451697216',
+                           publisher=publishe
 r)
 book.contributors.set([contributor1, contributor2], through_defaults={'role': 'CO_AUTHOR'})
 
@@ -129,8 +140,6 @@ book = Book.objects.filter(publication_date__gt=date(2014, 1, 1))
 ### chains of query
 Book.objects.filter(publication_date__gt=date(2014, 1, 1)).filter(...)
 
-
-
 # order: order_by
 ## descending:
 Book.objects.order_by('-title')
@@ -144,7 +153,7 @@ Book.objects.filter(publisher__name='Packt Publishing')
 ## query by model name in lowercase
 Publisher.objects.get(book__title='..')
 ## query by object instance: set.all()
-book = Book.objects.get(title='') # optional
+book = Book.objects.get(title='')  # optional
 publisher = Publisher.object.get(name='')
 publisher.book_set.all()
 
@@ -155,8 +164,8 @@ Contributor.objects.filter(last_names='...').update(first_names='')
 
 ```
 
-
 #### <project> directory
+
 * next to ``manage.py``
 
 |    File     | Meaning                     |
@@ -168,14 +177,16 @@ Contributor.objects.filter(last_names='...').update(first_names='')
 |   wsgi.py   | communicate with Django App |
 
 ##### Settings.py
+
 * global variables
+
 > Do not use/import self-created settings file. Use **django.conf** or settings will be affected by
 > 1. other different settings.py file
 > 2. Hidden settings of Django
 > 3. Third-party libraries settings
 
 > if one setting variable is missing, the value will fall back to the default value of Django
-> 
+>
 > If using self-created settings files, the value will not fall back
 
 |    variable    | Meaning                                                                                  |
@@ -187,10 +198,8 @@ Contributor.objects.filter(last_names='...').update(first_names='')
 |   TEMPLATES    ||
 |    APP_DIRS    | look in a templates directory inside each INSTALLED_APP when loading templates           |
 
-
-
-
 ### django app
+
 |    File     | Meaning                                                                         |
 |:-----------:|:--------------------------------------------------------------------------------|
 | __init__.py | indicate python module                                                          |
@@ -201,24 +210,26 @@ Contributor.objects.filter(last_names='...').update(first_names='')
 |  tests.py   | test code                                                                       |
 |  views.py   | django views                                                                    |
 
-
 ## QueryDict Object
+
 * immutable
-  * require `copy` to edit the object
+    * require `copy` to edit the object
+
 ```python
 qd = QueryDict('k=a&k=b&k=c')
-qd['k'] # c
-qd.get('k') #c
-qd.getlist('k') # ['a', 'b', 'c']
-qd.getlist('g') # []
+qd['k']  # c
+qd.get('k')  # c
+qd.getlist('k')  # ['a', 'b', 'c']
+qd.getlist('g')  # []
 ```
 
 ```python
 qd2 = qd.copy()
 qd2['k'] = 'd'
-qd2['k'] # change c -> d  
+qd2['k']  # change c -> d  
 ```
-> Note: 
+
+> Note:
 >
 > name = request.GET.get('name', 'world') => empty value if name=""
 > use name = request.GET.get('name') or 'world'
@@ -226,20 +237,24 @@ qd2['k'] # change c -> d
 ## Functions
 
 ### Render
+
 * a shortcut function that returns an HttpResponse instance
 * two arguments
-  * request
-  * name/relative path of the template being rendered
-  * (optional) render context containing variables available in the template
-
+    * request
+    * name/relative path of the template being rendered
+    * (optional) render context containing variables available in the template
 
 ## ORM
+
 * convert object-oriented Python code into actual database constructs
 * advantage: avoid sql injection
+
 ### Migration
+
 * transformation of Python code into database structures
 
 # HTTP status
+
 | Status  | Meaning                                           |
 |:-------:|:--------------------------------------------------|
 | 100-199 | protocol changes, more data is requires. No worry |
@@ -248,20 +263,20 @@ qd2['k'] # change c -> d
 | 400-499 | error on client side                              |
 | 500-599 | error on server side                              |
 
-
 # URL Path
-* Project root url
-  * settings.py: ROOT_URLCONF
-  * determine the URL configuration file to be used first
-* include:
-  * on django project level 
-  * a shortcut that allows you to combine URL configurations 
-    * a project has many application. each application has their own URL configurations
 
+* Project root url
+    * settings.py: ROOT_URLCONF
+    * determine the URL configuration file to be used first
+* include:
+    * on django project level
+    * a shortcut that allows you to combine URL configurations
+        * a project has many application. each application has their own URL configurations
 
 # Template
+
 * no need to hardcode template
-  * settings.py: TEMPLATES
+    * settings.py: TEMPLATES
 
 | Variable | Meaning                                                                                                          |
 |:--------:|:-----------------------------------------------------------------------------------------------------------------|
@@ -271,14 +286,19 @@ qd2['k'] # change c -> d
 | OPTIONS  | template engine-specific settings e.g. context processors                                                        |
 
 ## Template Language
+
 ### Template Variables
+
 * value carried by the variables will be replaced in the template
+
 ```commandline
   {{ variable }}
 ```
 
 ### Template Tags
+
 * for control flow, like if else or for loop
+
 ```commandline
   {% for element in element_list %}
     ...
@@ -293,14 +313,53 @@ qd2['k'] # change c -> d
     
   {% endcomment %}
 ```
+
 ### Filters
 
 ```commandline
  {{ variable|<filter> }}    
 ```
-* `<filter>`: 
-  * lower: convert string into lowercase
-  * title: convert string into capital
 
-## Template Inheritance
-* 
+* `<filter>`:
+    * lower: convert string into lowercase
+    * title: convert string into capital
+
+# Admin
+
+* an django app: settings.py: django.contrib.admin
+* url: admin
+* when the app initialized, it calls its autodiscover() to detect any other installed apps contain an admin module
+
+## Create a superuser
+
+```commandline
+python3 manage.py createsuperuser
+```
+
+## change password
+
+```commandline
+python manage.py changepassword <username>
+
+```
+
+## register models
+
+* models can be managed by authentication
+* use the admin's app to register our models
+    * django app: admin.py
+    * make models available to the admin app by adding it to a registry of classes contained in admin.site._registry
+
+## Model Admin
+
+# <app>.admin.py
+
+|   Attribute    | Meaning                                                         | Determined by                                                                  | Note                                          |
+|:--------------:|:----------------------------------------------------------------|:-------------------------------------------------------------------------------|:----------------------------------------------|
+| date_hierarchy | represent date list on the web                                  |
+|  list_display  | represent the column title of tables                            | __str__ :from django.contrib.admin import ModelAdmin ; ModelAdmin.list_display | Only a single column or customized ModelAdmin |
+|  list_filter   | the right bar, filter                                           ||
+| search_fields  | the top bar of search                                           |
+|    exclude     | hide fields on the admin site                                   |
+|     fields     | only fields in the list of fields can be seen on the admin site |
+|   fieldsets    | set the title of fields or no title                             |
