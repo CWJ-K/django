@@ -19,11 +19,7 @@ import reviews.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    #path('admin/', admin_site.urls),
-    path('', reviews.views.index),
+    # path('admin/', admin_site.urls),
     path('', include('reviews.urls')),
-
+    # path(settings.STATIC_URL, django.conf.urls.static),
 ]
-
-
-

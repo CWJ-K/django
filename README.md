@@ -242,6 +242,7 @@ qd2['k']  # change c -> d
 * two arguments
     * request
     * name/relative path of the template being rendered
+        * in the same app directory
     * (optional) render context containing variables available in the template
 
 ## ORM
@@ -363,3 +364,242 @@ python manage.py changepassword <username>
 |    exclude     | hide fields on the admin site                                   |
 |     fields     | only fields in the list of fields can be seen on the admin site |
 |   fieldsets    | set the title of fields or no title                             |
+
+# Static Files
+
+* django refused to serve static files in production
+    * serving static files keeping Python process busy for the duration of the request
+    * let web server deal with the static files
+* use staticfileds app
+    * static view is designed only for use in development
+        * will not work is DEBUG setting is False
+* when deploy to production, only change the STATIC_URL in settings.py
+    * STATIC_URL: the prefix path of the static file on the web url
+
+|      Features       | Meaning                                                                                                                                                                                                                                                                                                                                                                   |
+|:-------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| static template tag | automatically generate the url to a static URL/path for assets and HTML inside a template. Without it, developers have to hardcode the long urls of static files in css, html files                                                                                                                                                                                       |
+|    View (static)    | receive requests and server/load static files                                                                                                                                                                                                                                                                                                                             |
+| static file finders | locate the static files on the disk                                                                                                                                                                                                                                                                                                                                       |
+|    collectstatic    | finds all static files (files are copied into the STATIC_ROOT, the location is predictable by the frontend web server) and move them outside the Django Project directory into a web server directory, e.g. /var/www/bookr/static/log.png for security. You can also move the an intermediary directory and have your development process move to a CDN or another server |
+|     findstatic      | show which static file on disk is loaded for a particular request; help debug to see which static files are not loaded                                                                                                                                                                                                                                                    |
+
+## file finders
+
+### the process of Static files being loaded
+
+1. When receiving requests, convert URL to directory path => find the static files
+
+### Types
+
+#### AppDirectoriesFinder
+
+    * find static files inside each app directory, called static
+    * recommend to store static files specific for the app
+
+##### Process
+
+1. use {% load static %} to load the library in html files
+2. project_directory/templates: add html files
+3. project_directory/settings.py:
+    * TEMPLATES['DIRS]: [os.path.join(BASE_DIR, 'templates')] => locate template directory
+4. project_directory/urls.py:
+    * urlpatterns = [path('', TemplateView.as_view(template_name='index.html'))] => set url path for views
+
+#### FileSystemFinder
+
+* recommend to store common static files for the whole project
+* global static directory used in many different projects
+* settings: STATICFILES_DIRS
+* if static files with the same name in different projects, use the one listed first in the list
+
+##### Process
+
+1. project_directory/static: add css files
+2. settings.py: add STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
+    * can add extra path
+    * set the static under the base dir as STATICFILES_DIRS
+    * the priority is the highest
+
+> default:AppDirectoriesFinder => find all statics in all apps under the root
+
+3. use {% load static %} to load the library in html files
+
+### static file namespacing
+
+* issue: static files have the same name in different directory
+    * the URL path of static files is relative to the static directory
+        * /static/logo.png
+* solution: add directory in static directory
+    * reviews_app -> static -> reviews -> logo.png
+
+## static template tag
+
+* point to the actual file => quotes
+
+```commandline
+<img src="{% static 'logo.png' %}">
+```
+
+* point to the variable representing the actual file => without quotes
+
+```commandline
+<img src="{% static image_file %}">
+```
+
+* create a variable to use repeatedly
+
+```commandline
+<img src="{% static 'logo.png' as logo_path %}">
+
+<img src="{% static logo_path %}">
+```
+
+## collectstatic
+
+### frontend web server
+
+* designed to route requests to applications (like django) or read static files from disk
+* can handle requests faster, not able to generate dynamic content (like django)
+* e.g. Apache HTTPD, Nginx, lighttpd
+
+### Process
+
+* project_directory: add a directory, e.g. static_production_test
+* settings.py: STATIC_ROOT = os.path.join(BASE_DIR, 'static_production_test')
+* Tuple: ('web server path', 'static files path in django')
+  STATICFILES_DIRS = [
+  os.path.join(BASE_DIR, 'static'),
+  ('images', os.path.join(BASE_DIR, 'static_images')), # => web server:images/image.jpg
+  ('css', os.path.join(BASE_DIR, 'static_css')),
+  ]
+
+
+* terminal: python3 manage.py collectstatic
+
+=> copy all the files for all installed apps
+
+## findstatic
+
+```commandline
+python manage.py findstatic <-v0/-v2> <static file name> <static file name> <static file name>
+```
+
+* for static files already namespaced
+
+```commandline
+python manage.py findstatic <full_relative_path/static file name>
+```
+
+## cache static files
+
+* not cache dynamic responses (rendered templates)
+    * designed to be dynamic
+        * to get the latest version
+    * quite small in size, compated with assets like images => no speed advantage when caching
+* collectstatic: append a hash of their content to the filename
+    * e.g. logo.f30ba08c60ba.png
+    * file name changing only when the content changes => browser will always download the new content
+
+* ManifestFilesStorage
+    * the engine will automatically insert the hashed filename when using the static template tag
+
+* other custom storage engines
+    * e.g. CDN, Amazon S3, Google Cloud bucket
+
+### Process
+
+1. settings.py: STATICFILES_STORAGE = 'django.contrib.staticfiles.storage.ManifestStaticFilesStorage'
+2. python manage.py collectstatic
+3. see staticfiles.json: check the latest version of files
+
+# Form
+
+## errors
+
+|      error       | meaning                                                                            |
+|:----------------:|:-----------------------------------------------------------------------------------|
+|   field errors   | apply to a specific field                                                          |
+| non-filed errors | display at the top of the form. for security, specfic error will not show to users |
+
+## element
+
+| element | meaning                                                                                                                           | Note                                             |
+|:-------:|:----------------------------------------------------------------------------------------------------------------------------------|:-------------------------------------------------|
+| method  | http method to submit the form, e.g. get or post                                                                                  ||
+| action  | refer to the URL (or path)                                                                                                        ||
+| enctype | encoding type of the form. default: value is omitted => application/x-www-form-urlencoded; uploading files => multipart/form-data | django handles the different types automatically |
+
+## CSRF token
+
+## GET vs POST
+
+| Method | Scenario  1                                                                                 | Scenario                                       | Note                                                                                            |
+|:------:|:--------------------------------------------------------------------------------------------|:-----------------------------------------------|:------------------------------------------------------------------------------------------------|
+|  GET   | Idempotent: no mather how many times uses refresh the page, you will get the same data back | will pass sensitive data though URL parameters | the maximum length of URL allowed by a browser cab be short compared to the size of a POST body |
+|  POST  | Non-idempotent: repeating POST requests will update the information                         |                                                | Django only applies CSRF projection to POST                                                     |
+
+### Get
+
+* '/search/<str: search>/<int:page>/<str: order>'
+    * the URL is bad since it is limited by the order of parameters. If page <int> not proivided, the page will not be
+      sorted
+* use query parameters: optional
+    * ?search=search+term:
+    * ?search=search+term&page=2
+    * ?search=search+term&order=author
+    * ?search=search+term&page=2&order=author
+
+## Widget
+
+|      Files       | Widget                                                                                                     | Note                             |
+|:----------------:|:-----------------------------------------------------------------------------------------------------------|----------------------------------|
+|   text <input>   | CharField                                                                                                  |
+| password <input> | PasswordInput                                                                                              |
+|   RadioSelect    | ChoiceField                                                                                                |
+|     Textarea     | CharField                                                                                                  | height & width can be set by CSS |
+|      Input       | HiddenInput                                                                                                |
+|     checkbox     | BooleanField                                                                                               |
+|     choices      | ChoiceFiled                                                                                                |
+| multiple choices | MultipleChoiceField                                                                                        |
+|      Number      | IntegerField, FloatField, DecimalField                                                                     |
+|      email       | EmailField                                                                                                 |
+|       Date       | DateField, DateField(input_formats=[...]), forms.DateField(widget=forms.DateInput(attrs={'type': 'date'})) | DateField: text format           |
+|   HiddenInput    | no HiddenField => forms.CharField(widget=forms.HiddenInput, initial='Hidden Value')                        |
+
+## Render a form in a template
+
+| Layout methods | Meaning                                                |
+|:--------------:|:-------------------------------------------------------|
+|    as_table    | render form as table rows                              |
+|     as_url     | render form as list items (li) inside ul or ol element |
+|      as_p      | render form as p tags                                  |
+
+## validating forms
+
+* unbound: the form of post data is unvalidated
+    ```
+    form = ExampleForm(
+    ```
+* bound: the form of post data is validated
+    ```
+    form = ExampleForm(request.POST)
+    ```
+    * if form is valid, redirect the sucess page
+        * in case users reloading pages and resend the data
+        ```
+          if form.is_valid():
+            return redirect('/success-page')
+        ```
+        * form.cleaned_data
+            * will not show csrf tokens and button string
+
+### built-in filed validation
+
+|    Argument    | Meaning                                             |
+|:--------------:|:----------------------------------------------------|
+|   max_length   | available on CharField, FileField                   |
+|   min_length   ||
+|   max_value    | available on IntegerField, FloatField, DecimalField |
+|   max_digits   | Decimal Field                                       |
+| decimal_places | decimal_places = 3, input value: 12.24 => 12.240    |
