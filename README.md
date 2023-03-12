@@ -594,12 +594,26 @@ python manage.py findstatic <full_relative_path/static file name>
         * form.cleaned_data
             * will not show csrf tokens and button string
 
+* ValidationError
+    * if input data is wrong, django automatically raises the error
+
 ### built-in filed validation
 
-|    Argument    | Meaning                                             |
-|:--------------:|:----------------------------------------------------|
-|   max_length   | available on CharField, FileField                   |
+|    Argument    | Meaning                                                |
+|:--------------:|:-------------------------------------------------------|
+|   max_length   | available on CharField, FileField                      |
 |   min_length   ||
-|   max_value    | available on IntegerField, FloatField, DecimalField |
-|   max_digits   | Decimal Field                                       |
-| decimal_places | decimal_places = 3, input value: 12.24 => 12.240    |
+|   max_value    | available on IntegerField, FloatField, DecimalField    |
+|   max_digits   | Decimal Field                                          |
+| decimal_places | decimal_places = 3, input value: 12.24 => 12.240       |
+|     label      | set the label test for a field                         |
+|   help_text    | display after the field                                |
+|   add_error    | None: non-field error. No specify which field is error |
+
+### clean
+
+* call super().clean()
+    * for cross-field validation:
+        * automatically get the form data to clean up
+        * no parameters are required
+    

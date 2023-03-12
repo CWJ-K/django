@@ -4,25 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5fa3352-9d3f-496a-b88a-a62e5945a4f8" name="Changes" comment="feat: chapter 4 fin">
-      <change afterPath="$PROJECT_DIR$/bookr/reviews/form.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookr/static/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_site/static/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_site/static_css/main.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_site/static_images/image.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/business_site/templates/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/form_project/form_example/forms.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/form_project/form_example/templates/form-example.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/watcherTasks.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+    <list default="true" id="e5fa3352-9d3f-496a-b88a-a62e5945a4f8" name="Changes" comment="feat: chapter 6 fin">
+      <change afterPath="$PROJECT_DIR$/bookr/reviews/static/reviews/logo.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/form_example.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/instance-form.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/bookr/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/bookr/settings.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/bookr/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/bookr/urls.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/reviews/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/base.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/reviews/templates/search-results.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/search-results.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookr/reviews/form.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/form.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookr/reviews/templates/reviews/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookr/reviews/templates/reviews/book_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/book_detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookr/reviews/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/urls.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookr/reviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookr/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form_project/form_example/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/form_project/form_example/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/form_project/form_example/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/form_project/form_example/views.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -32,8 +27,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="HTML File" />
         <option value="Python Script" />
+        <option value="HTML File" />
       </list>
     </option>
   </component>
@@ -77,12 +72,14 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "last_opened_file_path": "C:/Users/wanju/Projects/django/form_project/manage.py",
+    "TODO_SCOPE": "All Places",
+    "last_opened_file_path": "C:/Users/wanju/Projects/django/bookr/reviews/static/reviews",
     "settings.editor.selected.configurable": "watcher.settings"
   }
 }]]></component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\wanju\Projects\django\bookr\reviews\static\reviews" />
       <recent name="C:\Users\wanju\Projects\django\comment8or\comment8or\templates\comment8or" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -199,7 +196,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678371448415</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="feat: chapter 6 fin">
+      <created>1678548347383</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1678548347383</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -219,7 +223,8 @@
     <MESSAGE value="feat: add sqlite" />
     <MESSAGE value="feat: chapter 3 fin" />
     <MESSAGE value="feat: chapter 4 fin" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: chapter 4 fin" />
+    <MESSAGE value="feat: chapter 6 fin" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: chapter 6 fin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -228,6 +233,11 @@
           <url>file://$PROJECT_DIR$/bookr/bookr/urls.py</url>
           <line>15</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/form_project/form_example/forms.py</url>
+          <line>27</line>
+          <option name="timeStamp" value="2" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
