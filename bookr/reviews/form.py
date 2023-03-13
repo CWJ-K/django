@@ -1,6 +1,6 @@
 from django import forms
 from django.core.exceptions import ValidationError
-from .models import Publisher, Review
+from .models import Publisher, Review, Book
 
 
 class SearchForm(forms.Form):
@@ -22,3 +22,7 @@ class ReviewForm(forms.ModelForm):
     rating = forms.IntegerField(min_value=0, max_value=5)  # override the validation for the model's rating field
 
 
+class BookMediaForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = ['cover', 'sample']

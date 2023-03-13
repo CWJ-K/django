@@ -616,4 +616,65 @@ python manage.py findstatic <full_relative_path/static file name>
     * for cross-field validation:
         * automatically get the form data to clean up
         * no parameters are required
-    
+
+# Upload Files
+
+* Only POST requests support
+    * impossible upload file through URL parameter: GET
+* 前端可以上傳檔案到 request 參數，但是難做資料驗證
+    * <!-- <input type="file" name="file_upload"> -->
+    * request.FILES['file_upload']
+* 後端可以將 request 收到的 form, 先轉到 forms.Form class, 進行資料驗證，最後傳回前端
+    * form = UploadForm(request.POST, request.FILES)
+    * form.cleaned_data['file_upload']
+
+## Process
+
+1. settings.py :
+    ```
+    if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    ```
+
+### Context processors
+
+## Process
+
+1. settings.py :
+    2. TEMPLATES: django.template.context_process.media'
+       > To let MEDIA_URL as variable
+
+## request.FILES
+
+``upload = request.FILES['file-upload-name']``
+
+|  Attribute   | Code                |
+|:------------:|:--------------------|
+|     size     | upload.size         |
+|     name     | upload.name         |
+| content-type | upload.content-type |
+|   charset    | upload.charset      |
+
+## Security
+
+* when saving files to disk, generate a name instead of using the one provided by the uploader
+    * when receiving files, check the file name extension matches the content type
+        * Python library: mimetype
+
+## Image file upload
+
+``
+picture_field = form.cleaned_data['picture']
+image = picture_field.image
+``
+
+| Attribute  | Code                                             |
+|:----------:|:-------------------------------------------------|
+|   width    | image.w                                          |
+|   height   | image.h                                          |
+|   format   | image.f                                          |
+| open image | from PIL import Image; Image.open(picture_field) |
+
+### validate image
+
+* Python library: pillow

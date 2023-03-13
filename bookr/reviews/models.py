@@ -27,6 +27,12 @@ class Book(models.Model):
     publisher = models.ForeignKey(Publisher, on_delete=models.CASCADE)
     # through: a intermediary table/bridge to connect two tables
     contributors = models.ManyToManyField('Contributor', through='BookContributor')
+    cover = models.ImageField(null=True,
+                              blank=True,
+                              upload_to="book_covers/")
+    sample = models.FileField(null=True,
+                              blank=True,
+                              upload_to="book_samples/")
 
     def __str__(self):
         return '{} ({})'.format(self.title, self.isbn)
