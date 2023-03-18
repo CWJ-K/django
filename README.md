@@ -365,6 +365,22 @@ python manage.py changepassword <username>
 |     fields     | only fields in the list of fields can be seen on the admin site |
 |   fieldsets    | set the title of fields or no title                             |
 
+## Customize Admin Site
+
+* AdminSite class
+* the attribute can be overridden
+
+|  Attribute  | Meaning                                         |
+|:-----------:|:------------------------------------------------|
+| site_header | text at the top of every admin page             |
+| site_title  | text in the title bar of the browser            |
+|  site_url   | link to View Site                               |
+| index_title | text on the index page of the admin application |
+
+### get_url()
+
+* [specify your custom URLs before the django admin URLs](https://stackoverflow.com/a/68368300)
+
 # Static Files
 
 * django refused to serve static files in production
@@ -678,3 +694,44 @@ image = picture_field.image
 ### validate image
 
 * Python library: pillow
+
+### Middleware modules
+
+* settings.py
+
+|        Middleware        | Meaning                                                           |
+|:------------------------:|:------------------------------------------------------------------|
+|    SecurityMiddleware    | common security enhancements. e.g. SSL redirects, response header |
+|    SessionMiddleware     | Session Support                                                   |
+|     CommonMiddleware     | Miscellaneous features                                            |
+|    CsrfViewMiddleware    | protection against Cross-site request forgery (CSRF)              |
+| AuthenticationMiddleware | add user attribute to the request object                          | 
+|    MessageMiddleware     | flash message                                                     |
+| XFrameOptionsMiddleware  | protect against X-Frame-Options header clickjacking attacks       |
+
+# Session
+
+* settings.py
+* all sessions require storing a session ID in a cookie
+* Aware of legal policy to warn users if the site sets cookies in their browser
+    * Django Simple Cookie Consent
+    * Django Cookie Law
+
+|    session_engine     | Meaning                                              |
+|:---------------------:|:-----------------------------------------------------|
+|    Cached sessions    | cache session information in memory or in a database |
+|  File-based sessions  | for performance is not an issue                      |
+| Cookie-based sessions | keep sessions entirely in the web browser cookie     |
+
+## Session data
+
+* store in schema: django_session
+    * encoded in base64
+
+* rules to store data in sessions
+    1. key should be string
+    2. key starts with underscore
+    3. data only is encoded as JSON
+    4. avoid reassigning request.session to different values at the same time
+       > no: request.session = {'a': 30, 'b': 45}
+       > ok: request.session['a'] = 30; request.session['b'] = 45

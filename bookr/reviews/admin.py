@@ -10,10 +10,14 @@ class ContributorAdmin(admin.ModelAdmin):
 
 
 class BookAdmin(admin.ModelAdmin):
+    model = Book
     date_hierarchy = 'publication_date'
-    list_display = ('title', 'isbn13')  # replace __str__
+    list_display = ('title', 'isbn13', 'get_publisher', 'publication_date')  # replace __str__
     list_filter = ('publisher', 'publication_date')
     search_fields = ('title', 'isbn__exact', 'publisher__name')
+
+    def get_publisher(self, obj):
+        return obj.publisher.name
 
 
 class ReviewAdmin(admin.ModelAdmin):
