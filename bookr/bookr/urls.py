@@ -29,7 +29,9 @@ urlpatterns = [
 
     # path('admin/', admin_site.urls),
     path('', include('reviews.urls')),
+    path('book_management/', include('book_management.urls')),
     # path(settings.STATIC_URL, django.conf.urls.static),
+    path('filter_demo/', include('filter_demo.urls'))
 ]
 
 if settings.DEBUG:

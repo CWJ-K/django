@@ -4,23 +4,28 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e5fa3352-9d3f-496a-b88a-a62e5945a4f8" name="Changes" comment="feat: chapter 8 fin">
-      <change afterPath="$PROJECT_DIR$/bookr/bookr/views.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookr/session_info.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookr/templates/admin/admin_profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookr/templates/admin/logout.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookr/templates/profile.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bookr/templates/registration/login.html" afterDir="false" />
+    <list default="true" id="e5fa3352-9d3f-496a-b88a-a62e5945a4f8" name="Changes" comment="feat: chapter 10 fin">
+      <change afterPath="$PROJECT_DIR$/bookr/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/book_management/forms.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/book_management/templates/book_form.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/book_management/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/templates/book_list.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/templates/index.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/templates/simple_tag_template.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/templatetags/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/templatetags/explode_filter.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/templatetags/inclusion_tag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/templatetags/simple_tag.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/filter_demo/urls.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/book_list_2.html" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bookr/reviews/templatetags/profile_tags.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookr/bookr/settings.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/bookr/settings.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookr/bookr/urls.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/bookr/urls.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookr/bookr/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/bookr/views.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/bookr/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/reviews/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/reviews/templates/reviews/book_detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/book_detail.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/reviews/templates/reviews/books_list.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/templates/reviews/books_list.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/reviews/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/reviews/views.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bookr/templates/base.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/templates/base.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bookr/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/bookr/templates/profile.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,11 +92,11 @@
       <recent name="C:\Users\wanju\Projects\django\comment8or\comment8or\templates\comment8or" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\wanju\Projects\django\bookr\filter_demo" />
       <recent name="C:\Users\wanju\Projects\django\bookr" />
       <recent name="C:\Users\wanju\Projects\django\bookr\reviews\management\commands" />
       <recent name="C:\Users\wanju\Projects\django\media_project\media_example\templates" />
       <recent name="C:\Users\wanju\Projects\django\media_project\media_example" />
-      <recent name="C:\Users\wanju\Projects\django\bookr\static" />
     </key>
   </component>
   <component name="RunManager" selected="Python.django">
@@ -223,7 +228,14 @@
       <option name="project" value="LOCAL" />
       <updated>1678721140597</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="feat: chapter 10 fin">
+      <created>1679133306429</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1679133306429</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -246,7 +258,8 @@
     <MESSAGE value="feat: chapter 6 fin" />
     <MESSAGE value="feat: chapter 7 fin" />
     <MESSAGE value="feat: chapter 8 fin" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: chapter 8 fin" />
+    <MESSAGE value="feat: chapter 10 fin" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: chapter 10 fin" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

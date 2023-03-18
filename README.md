@@ -34,12 +34,23 @@
 
 * model view template
     * model: define the data for your application and abstraction layer
-    * view: the logic for your application
-        * function-based view
-        * class-based view
-            * compared with function-based view, fewer lines of code need to be used
-            * inherit Django's generic views
-    * template: HTML files
+        * view: the logic for your application
+            * function-based view (FBVs)
+                * take HTTPRequest type object
+            * class-based view (CBVs)
+                * compared with function-based view, fewer lines of code need to be used
+                * inherit Django's generic views
+                * ``.as_view()``: allow the view class to be mapped to a URL endpoint
+            * CURD
+
+              |  Type  | class      |
+                            |:------:|:-----------|
+              | create | CreateView |
+              | Upate  | UpdateView |
+              | Delete | DeleteView |
+              |  Read  | DetailView |
+
+* template: HTML files
 
 ## Structure of directories
 
@@ -735,3 +746,16 @@ image = picture_field.image
     4. avoid reassigning request.session to different values at the same time
        > no: request.session = {'a': 30, 'b': 45}
        > ok: request.session['a'] = 30; request.session['b'] = 45
+
+# Templates
+
+## Filters
+
+* create an app for filters
+
+## Template Tags
+
+|     Type      | Meaning                                                                                                                               |
+|:-------------:|:--------------------------------------------------------------------------------------------------------------------------------------|
+|  Simple Tag   | for variable data                                                                                                                     |
+| Inclusion Tag | for data variables which are provides and generate an output; for rendering a template as a response to their usage inside a template |
