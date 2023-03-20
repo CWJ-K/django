@@ -68,6 +68,9 @@ class Contributor(models.Model):
         initials = ''.join([name[0] for name in self.first_names.split(' ')])
         return '{}, {}'.format(self.last_names, initials)
 
+    def number_contributions(self):
+        return self.bookcontributor_set.count()
+
 
 # if the intermediary is not built, Django will automatically build it
 class BookContributor(models.Model):

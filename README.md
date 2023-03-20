@@ -44,7 +44,7 @@
             * CURD
 
               |  Type  | class      |
-                            |:------:|:-----------|
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |:------:|:-----------|
               | create | CreateView |
               | Upate  | UpdateView |
               | Delete | DeleteView |
@@ -759,3 +759,85 @@ image = picture_field.image
 |:-------------:|:--------------------------------------------------------------------------------------------------------------------------------------|
 |  Simple Tag   | for variable data                                                                                                                     |
 | Inclusion Tag | for data variables which are provides and generate an output; for rendering a template as a response to their usage inside a template |
+
+# Restful API
+
+* a connection between frontend website and backend server
+    * frontend will know nothing and needs to retrieve the data through HTTP request from backend
+
+## install
+
+```commandline
+pip install djangorestframework
+```
+
+## Rest Views
+
+* function-based views: use `@api_view()` to return serialized json or other types of response instead of HttpResponse
+    * Json or XML format helps translate information between Django and frontend by http request
+* class-based views:
+    * use ListAPIView, RetrieveAPIView
+    * directly return responses instead of typing ``return Response(book_serializer.data)``
+        * specify data: `queryset`
+        * specify methods to serialize data: `serializer_class`
+
+## serializer
+
+* convert complex Python objects into formats, like JSON or XML
+    * convert models data to serializers
+    * define how to serialize
+* Model Serializers: create serializers by using the definition of the fields on the model, instead of typing by users,
+  e.g. models.charField..
+    * class Meta
+
+* StringRelatedField:
+    * if only take one column from models
+    * if take multiples column => define a customized Model Serializers
+
+## viewsets
+
+* a set of views in a single class
+    * combine view classes into a single class
+* ModelViewSet
+    * allows to CURD model instances
+* ReadOnlyModelViewSet
+    * disallow CURD
+
+## Routers
+
+* automatically create required URL for viewsets
+    * a viewset is accessed at different URLs
+
+## Authentication
+
+* Types
+    * basic authentication
+    * session authentication
+    * token authentication
+        * generate a unique token for a user in exchange for the user's username and password
+        * token is unique
+        * eliminate the needs to pass the username and password on every request
+    * remote user authentication
+
+## add authtoken
+
+* settings.py - INSTALLED_APPS: 'rest_framework.authtoken'
+* ``python manage.py migrate``
+    * authtoken app has associated database changes
+* 增加 login 的 view, 並提供 token
+* 在其他 viewset 增加需要驗證。此後使用 viewset， headers 都要有 token
+
+# Generate CSV, PDF, Other Binary files
+
+## Csv
+
+* DictReader
+    * output: {column1: 'a', column2: 'b'} instead of [a, b]
+
+## pdf
+
+* package: weasyprint
+
+## grpah
+
+* package: plotly

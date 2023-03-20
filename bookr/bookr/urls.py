@@ -20,6 +20,8 @@ from django.conf import settings
 from django.conf.urls.static import static
 from bookr.views import profile
 
+import bookr.views
+
 # from bookr_admin.admin import admin_site
 
 urlpatterns = [
@@ -31,7 +33,8 @@ urlpatterns = [
     path('', include('reviews.urls')),
     path('book_management/', include('book_management.urls')),
     # path(settings.STATIC_URL, django.conf.urls.static),
-    path('filter_demo/', include('filter_demo.urls'))
+    path('filter_demo/', include('filter_demo.urls')),
+    path('accounts/profile/reading_history', bookr.views.reading_history, name='reading_history')
 ]
 
 if settings.DEBUG:
