@@ -34,8 +34,15 @@ urlpatterns = [
     path('book_management/', include('book_management.urls')),
     # path(settings.STATIC_URL, django.conf.urls.static),
     path('filter_demo/', include('filter_demo.urls')),
-    path('accounts/profile/reading_history', bookr.views.reading_history, name='reading_history')
+    path('accounts/profile/reading_history', bookr.views.reading_history, name='reading_history'),
+    path('allauth', include('allauth.urls'))
 ]
 
 if settings.DEBUG:
+    import debug_toolbar
+
+    urlpatterns = [
+                      path('__debug__/', include(debug_toolbar.urls))
+                  ] + urlpatterns
+
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -44,7 +44,7 @@
             * CURD
 
               |  Type  | class      |
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        |:------:|:-----------|
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                |:------:|:-----------|
               | create | CreateView |
               | Upate  | UpdateView |
               | Delete | DeleteView |
@@ -838,6 +838,29 @@ pip install djangorestframework
 
 * package: weasyprint
 
-## grpah
+## graph
 
 * package: plotly
+
+# Configurations
+
+* install ``install django-configurations-2.4``
+* make configurations as a class
+
+## Database
+
+* install ``pip install dj-database-url``
+
+# Third Party Libraries
+
+## the django debug toolbar
+
+* display debug information about a web page right in your browser
+* how long the page took means:
+
+|                 Scenario                  | Probable Meaning                   |
+|:-----------------------------------------:|:-----------------------------------|
+|     A page taking a long time to load     | run too many database queries      |
+| a page is returning the wrong information | headers may be incorrect           |
+|     page is slow in non-database code     | check function running the longest |
+|            page look incorrect            | setting or templating is wrong     |
